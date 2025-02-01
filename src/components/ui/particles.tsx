@@ -98,7 +98,7 @@ export const Particles: React.FC<ParticlesProps> = ({
   const canvasSize = useRef<{ h: number; w: number }>({ h: 0, w: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
   const rafID = useRef<null | number>(null);
-  const resizeTimeout = useRef<NodeJS.Timeout>();
+  const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (canvasRef.current) {
