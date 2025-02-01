@@ -1,23 +1,22 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useInView, useMotionValue, useSpring } from "motion/react";
 import { ComponentPropsWithoutRef, useEffect, useRef } from "react";
 
-import { cn } from "@/lib/utils";
-
 interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
-  value: number;
-  direction?: "up" | "down";
-  delay?: number; // delay in s
   decimalPlaces?: number;
+  delay?: number; // delay in s
+  direction?: "down" | "up";
+  value: number;
 }
 
 export function NumberTicker({
-  value,
-  direction = "up",
-  delay = 0,
   className,
   decimalPlaces = 0,
+  delay = 0,
+  direction = "up",
+  value,
   ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -26,13 +25,14 @@ export function NumberTicker({
     damping: 60,
     stiffness: 100,
   });
-  const isInView = useInView(ref, { once: true, margin: "0px" });
+  const isInView = useInView(ref, { margin: "0px", once: true });
 
   useEffect(() => {
-    isInView &&
+    if (isInView) {
       setTimeout(() => {
         motionValue.set(direction === "down" ? 0 : value);
       }, delay * 1000);
+    }
   }, [motionValue, isInView, delay, value, direction]);
 
   useEffect(
@@ -40,8 +40,8 @@ export function NumberTicker({
       springValue.on("change", (latest) => {
         if (ref.current) {
           ref.current.textContent = Intl.NumberFormat("en-US", {
-            minimumFractionDigits: decimalPlaces,
             maximumFractionDigits: decimalPlaces,
+            minimumFractionDigits: decimalPlaces,
           }).format(Number(latest.toFixed(decimalPlaces)));
         }
       }),
@@ -50,11 +50,11 @@ export function NumberTicker({
 
   return (
     <span
-      ref={ref}
       className={cn(
         "inline-block tabular-nums tracking-wider text-black dark:text-white",
         className,
       )}
+      ref={ref}
       {...props}
     />
   );

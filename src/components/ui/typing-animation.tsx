@@ -5,20 +5,20 @@ import { motion, MotionProps } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 interface TypingAnimationProps extends MotionProps {
+  as?: React.ElementType;
   children: string;
   className?: string;
-  duration?: number;
   delay?: number;
-  as?: React.ElementType;
+  duration?: number;
   startOnView?: boolean;
 }
 
 export function TypingAnimation({
+  as: Component = "div",
   children,
   className,
-  duration = 100,
   delay = 0,
-  as: Component = "div",
+  duration = 100,
   startOnView = false,
   ...props
 }: TypingAnimationProps) {
@@ -77,11 +77,11 @@ export function TypingAnimation({
 
   return (
     <MotionComponent
-      ref={elementRef}
       className={cn(
         "text-4xl font-bold leading-[5rem] tracking-[-0.02em]",
         className,
       )}
+      ref={elementRef}
       {...props}
     >
       {displayedText}

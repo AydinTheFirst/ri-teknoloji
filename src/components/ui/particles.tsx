@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -8,9 +9,51 @@ import React, {
   useState,
 } from "react";
 
+interface Circle {
+  alpha: number;
+  dx: number;
+  dy: number;
+  magnetism: number;
+  size: number;
+  targetAlpha: number;
+  translateX: number;
+  translateY: number;
+  x: number;
+  y: number;
+}
+
 interface MousePosition {
   x: number;
   y: number;
+}
+
+interface ParticlesProps extends ComponentPropsWithoutRef<"div"> {
+  className?: string;
+  color?: string;
+  ease?: number;
+  quantity?: number;
+  refresh?: boolean;
+  size?: number;
+  staticity?: number;
+  vx?: number;
+  vy?: number;
+}
+
+function hexToRgb(hex: string): number[] {
+  hex = hex.replace("#", "");
+
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((char) => char + char)
+      .join("");
+  }
+
+  const hexInt = parseInt(hex, 16);
+  const red = (hexInt >> 16) & 255;
+  const green = (hexInt >> 8) & 255;
+  const blue = hexInt & 255;
+  return [red, green, blue];
 }
 
 function MousePosition(): MousePosition {
@@ -34,56 +77,14 @@ function MousePosition(): MousePosition {
   return mousePosition;
 }
 
-interface ParticlesProps extends ComponentPropsWithoutRef<"div"> {
-  className?: string;
-  quantity?: number;
-  staticity?: number;
-  ease?: number;
-  size?: number;
-  refresh?: boolean;
-  color?: string;
-  vx?: number;
-  vy?: number;
-}
-
-function hexToRgb(hex: string): number[] {
-  hex = hex.replace("#", "");
-
-  if (hex.length === 3) {
-    hex = hex
-      .split("")
-      .map((char) => char + char)
-      .join("");
-  }
-
-  const hexInt = parseInt(hex, 16);
-  const red = (hexInt >> 16) & 255;
-  const green = (hexInt >> 8) & 255;
-  const blue = hexInt & 255;
-  return [red, green, blue];
-}
-
-type Circle = {
-  x: number;
-  y: number;
-  translateX: number;
-  translateY: number;
-  size: number;
-  alpha: number;
-  targetAlpha: number;
-  dx: number;
-  dy: number;
-  magnetism: number;
-};
-
 export const Particles: React.FC<ParticlesProps> = ({
   className = "",
-  quantity = 100,
-  staticity = 50,
-  ease = 50,
-  size = 0.4,
-  refresh = false,
   color = "#ffffff",
+  ease = 50,
+  quantity = 100,
+  refresh = false,
+  size = 0.4,
+  staticity = 50,
   vx = 0,
   vy = 0,
   ...props
@@ -94,9 +95,9 @@ export const Particles: React.FC<ParticlesProps> = ({
   const circles = useRef<Circle[]>([]);
   const mousePosition = MousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+  const canvasSize = useRef<{ h: number; w: number }>({ h: 0, w: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
-  const rafID = useRef<number | null>(null);
+  const rafID = useRef<null | number>(null);
   const resizeTimeout = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
@@ -144,7 +145,7 @@ export const Particles: React.FC<ParticlesProps> = ({
   const onMouseMove = () => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
-      const { w, h } = canvasSize.current;
+      const { h, w } = canvasSize.current;
       const x = mousePosition.x - rect.left - w / 2;
       const y = mousePosition.y - rect.top - h / 2;
       const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
@@ -187,16 +188,16 @@ export const Particles: React.FC<ParticlesProps> = ({
     const dy = (Math.random() - 0.5) * 0.1;
     const magnetism = 0.1 + Math.random() * 4;
     return {
-      x,
-      y,
-      translateX,
-      translateY,
-      size: pSize,
       alpha,
-      targetAlpha,
       dx,
       dy,
       magnetism,
+      size: pSize,
+      targetAlpha,
+      translateX,
+      translateY,
+      x,
+      y,
     };
   };
 
@@ -204,7 +205,7 @@ export const Particles: React.FC<ParticlesProps> = ({
 
   const drawCircle = (circle: Circle, update = false) => {
     if (context.current) {
-      const { x, y, translateX, translateY, size, alpha } = circle;
+      const { alpha, size, translateX, translateY, x, y } = circle;
       context.current.translate(translateX, translateY);
       context.current.beginPath();
       context.current.arc(x, y, size, 0, 2 * Math.PI);
@@ -302,12 +303,12 @@ export const Particles: React.FC<ParticlesProps> = ({
 
   return (
     <div
+      aria-hidden="true"
       className={cn("pointer-events-none", className)}
       ref={canvasContainerRef}
-      aria-hidden="true"
       {...props}
     >
-      <canvas ref={canvasRef} className="size-full" />
+      <canvas className="size-full" ref={canvasRef} />
     </div>
   );
 };
