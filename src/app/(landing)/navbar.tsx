@@ -13,7 +13,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LucideMenu, LucideX } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 interface NavbarContextType {
@@ -70,11 +70,13 @@ export default function Navbar() {
 
 function NavbarContent() {
   return (
-    <nav className="sticky top-0 z-10 bg-background py-2 shadow-md">
+    <nav className="fixed top-0 z-10 w-full bg-background py-2 shadow-md">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-5">
           <NavbarToggler />
-          <Image alt="Logo" height={40} src="/logo.png" width={120} />
+          <Link href="/">
+            <Image alt="Logo" height={40} src="/logo.png" width={120} />
+          </Link>
           <div className="hidden gap-3 md:flex">
             {links.map((link) => (
               <NavLink key={link.href} {...link} />
@@ -102,6 +104,7 @@ const NavLink = ({ href, label }: NavLinkProps) => {
   // smooth scroll
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    if (!href.startsWith("#")) return;
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -109,7 +112,7 @@ const NavLink = ({ href, label }: NavLinkProps) => {
     <Link
       className="text-muted-foreground transition-colors hover:text-foreground"
       href={href}
-      onClick={handleClick}
+      onClick={href.startsWith("#") ? handleClick : undefined}
     >
       {label}
     </Link>
@@ -134,7 +137,7 @@ const NavbarToggler = () => {
 
 const NavbarMenu = () => {
   const { isMenuOpen, setIsMenuOpen } = useNavbar();
-  const path = usePathname();
+  const path = useSearchParams();
 
   React.useEffect(() => {
     setIsMenuOpen(false);
