@@ -13,7 +13,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LucideMenu, LucideX } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 interface NavbarContextType {
@@ -101,22 +101,30 @@ function NavbarContent() {
 }
 
 const NavLink = ({ href, label }: NavLinkProps) => {
+  const { setIsMenuOpen } = useNavbar();
+  const path = usePathname();
+
   // smooth scroll
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (!href.startsWith("#")) return;
+    setIsMenuOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  return (
-    <Link
-      className="text-muted-foreground transition-colors hover:text-foreground"
-      href={href}
-      onClick={href.startsWith("#") ? handleClick : undefined}
-    >
-      {label}
-    </Link>
-  );
+  if (path === "/") {
+    return (
+      <Link
+        className="text-muted-foreground transition-colors hover:text-foreground"
+        href={href}
+        onClick={href.startsWith("#") ? handleClick : undefined}
+      >
+        {label}
+      </Link>
+    );
+  } else {
+    return null;
+  }
 };
 
 const NavbarToggler = () => {
@@ -137,11 +145,6 @@ const NavbarToggler = () => {
 
 const NavbarMenu = () => {
   const { isMenuOpen, setIsMenuOpen } = useNavbar();
-  const path = useSearchParams();
-
-  React.useEffect(() => {
-    setIsMenuOpen(false);
-  }, [path, setIsMenuOpen]);
 
   return (
     <Drawer onOpenChange={setIsMenuOpen} open={isMenuOpen}>
