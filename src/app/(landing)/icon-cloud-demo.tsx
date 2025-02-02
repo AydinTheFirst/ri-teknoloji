@@ -31,6 +31,9 @@ const slugs = [
   "androidstudio",
   "sonarqube",
   "figma",
+  "python",
+  "ai",
+  "flutter",
 ];
 
 export function IconCloudDemo() {

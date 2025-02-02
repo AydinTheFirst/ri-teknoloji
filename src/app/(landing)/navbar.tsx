@@ -55,9 +55,9 @@ interface NavLinkProps {
 
 const links: NavLinkProps[] = [
   { href: "/", label: "Anasayfa" },
-  { href: "/projects", label: "Projeler" },
-  { href: "/about", label: "Hakkımızda" },
-  { href: "/contact", label: "İletişim" },
+  { href: "#about", label: "Hakkımızda" },
+  { href: "#services", label: "Hizmetlerimiz" },
+  { href: "#contact", label: "İletişim" },
 ];
 
 export default function Navbar() {
@@ -99,10 +99,17 @@ function NavbarContent() {
 }
 
 const NavLink = ({ href, label }: NavLinkProps) => {
+  // smooth scroll
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <Link
       className="text-muted-foreground transition-colors hover:text-foreground"
       href={href}
+      onClick={handleClick}
     >
       {label}
     </Link>
