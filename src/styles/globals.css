@@ -72,3 +72,19 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.prose {
+  @apply container mx-auto my-20 grid gap-1;
+}
+
+.prose h1 {
+  @apply text-4xl font-bold;
+}
+
+.prose h2 {
+  @apply text-3xl font-bold;
+}
+
+.prose p {
+  @apply text-lg;
+}
