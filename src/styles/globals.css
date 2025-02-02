@@ -74,7 +74,7 @@ body {
 }
 
 .prose {
-  @apply container mx-auto my-20 grid gap-1;
+  @apply container mx-auto my-20 grid max-w-xl gap-1;
 }
 
 .prose h1 {
