@@ -69,18 +69,12 @@ export default function Navbar() {
 
 function NavbarContent() {
   return (
-    <nav className="border-bpy-2 fixed top-0 z-10 w-full shadow-md">
+    <nav className="fixed top-0 z-10 w-full border-b bg-white/90 py-2 text-black shadow-md">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-5">
           <NavbarToggler />
           <Link href="/">
-            <Image
-              alt="Logo"
-              className="logo"
-              height={40}
-              src="/logo.png"
-              width={120}
-            />
+            <Image alt="Logo" height={40} src="/logo.png" width={120} />
           </Link>
         </div>
         <div className="hidden gap-3 md:flex">
@@ -119,7 +113,7 @@ const NavLink = ({ href, label }: NavLinkProps) => {
   if (path === "/") {
     return (
       <Link
-        className="text-muted-foreground transition-colors hover:text-foreground"
+        className="text-black/60 transition-colors hover:text-black"
         href={href}
         onClick={href.startsWith("#") ? handleClick : undefined}
       >
