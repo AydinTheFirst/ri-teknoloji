@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -92,7 +91,6 @@ function NavbarContent() {
               </span>
             </Button>
           </Link>
-          <ThemeToggle />
         </div>
         <NavbarMenu />
       </div>

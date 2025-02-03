@@ -308,14 +308,14 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     <canvas
       aria-label="Interactive 3D Icon Cloud"
       className="rounded-lg"
-      height={800}
+      height={600}
       onMouseDown={handleMouseDown}
       onMouseLeave={handleMouseUp}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       ref={canvasRef}
       role="img"
-      width={800}
+      width={600}
     />
   );
 }

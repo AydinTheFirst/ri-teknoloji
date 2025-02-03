@@ -43,11 +43,11 @@ const socials: LinkProps[] = [
 
 const NavLink = ({ href, icon, label }: LinkProps) => (
   <Link
-    className="flex gap-3 text-wrap text-muted-foreground transition-colors hover:text-foreground"
+    className="flex gap-3 text-wrap text-sm text-muted-foreground transition-colors hover:text-foreground"
     href={href}
   >
     {icon && <span>{icon}</span>}
-    {label}
+    <span className="max-w-xs">{label}</span>
   </Link>
 );
 
@@ -55,16 +55,7 @@ export default function Footer() {
   return (
     <footer className="border-t-2 bg-background py-16 shadow-md">
       <div className="container grid grid-cols-12 gap-10">
-        <div className="col-span-12 grid gap-3 md:col-span-6">
-          <Image alt="Logo" height={200} src="/logo.png" width={140} />
-          <p className="max-w-xs">
-            Biz, yenilikçi ve müşteri odaklı yazılım çözümleri sunan bir
-            teknoloji şirketiyiz. Amacımız, işletmelerin dijital dönüşüm
-            süreçlerini hızlandırmak ve verimliliklerini artırmak için
-            özelleştirilmiş yazılım çözümleri geliştirmektir
-          </p>
-        </div>
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 md:col-span-6">
           <ul className="grid list-inside gap-3">
             {pages.map((page) => (
               <li key={page.label}>
@@ -73,7 +64,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 flex justify-end md:col-span-6">
           <ul className="grid list-inside gap-3">
             {socials.map((social) => (
               <li key={social.label}>
@@ -81,6 +72,9 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="col-span-12">
+          <Image alt="Logo" height={200} src="/logo.png" width={140} />
         </div>
         <hr className="col-span-12" />
         <div className="col-span-12 grid gap-3 md:col-span-6">

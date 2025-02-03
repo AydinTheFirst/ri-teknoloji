@@ -9,6 +9,7 @@ import { Particles } from "@/components/ui/particles";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { Textarea } from "@/components/ui/textarea";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 import { Label } from "@radix-ui/react-label";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -31,9 +32,9 @@ export default function Page() {
         refresh
       />
       <ScrollProgress />
-      <div className="grid min-h-[80vh] grid-cols-1 place-items-center gap-3 py-16 md:grid-cols-2 md:py-0">
-        <div className="flex flex-col gap-3">
-          <h1 className="flex items-center gap-3 text-5xl font-bold">
+      <div className="grid min-h-[90vh] grid-cols-12 place-items-center gap-3 py-20 md:py-0">
+        <div className="col-span-12 flex flex-col gap-3 md:col-span-6">
+          <h1 className="flex flex-col text-5xl font-bold">
             <HyperText>GELECEK</HyperText>
             <NumberTicker
               className="whitespace-pre-wrap tracking-tighter"
@@ -41,25 +42,27 @@ export default function Page() {
               value={4.0}
             />
           </h1>
-          <p className="max-w-xl flex-1 text-lg">
-            Biz, yenilikçi ve müşteri odaklı yazılım çözümleri sunan bir
-            teknoloji şirketiyiz. Amacımız, işletmelerin dijital dönüşüm
-            süreçlerini hızlandırmak ve verimliliklerini artırmak için
-            özelleştirilmiş yazılım çözümleri geliştirmektir
-          </p>
-          <div className="flex gap-3">
-            <Link href={"#about"}>
-              <Button>Hadi Başlayalım</Button>
-            </Link>
-            <Link href={"#contact"}>
-              <Button variant="secondary">Bize Ulaşın</Button>
-            </Link>
-          </div>
+          <hr />
+          <TypingAnimation className="text-lg">
+            Geleceğinizi Birlikte Yazalım
+          </TypingAnimation>
+          <br />
         </div>
-        <div className="hidden md:block">
+
+        <div className="col-span-12 hidden md:col-span-6 md:block">
           <IconCloudDemo />
         </div>
+
+        <div className="col-span-12 flex gap-3">
+          <Link href="#about">
+            <Button>Keşfetmeye Başla</Button>
+          </Link>
+          <Link href="#contact">
+            <Button variant="secondary">Bize Ulaşın</Button>
+          </Link>
+        </div>
       </div>
+
       <AboutSection />
       <ProjectsSection />
       <ContactForm />

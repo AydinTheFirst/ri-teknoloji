@@ -7,9 +7,9 @@ export function ThemeProvider({ children }: React.PropsWithChildren) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
       disableTransitionOnChange
       enableSystem
+      forcedTheme="dark"
     >
       {children}
     </NextThemesProvider>
