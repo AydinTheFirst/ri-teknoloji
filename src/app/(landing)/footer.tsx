@@ -64,7 +64,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="col-span-12 flex justify-end md:col-span-6">
+        <div className="col-span-12 flex md:col-span-6 md:justify-end">
           <ul className="grid list-inside gap-3">
             {socials.map((social) => (
               <li key={social.label}>
