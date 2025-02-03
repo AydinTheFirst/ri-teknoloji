@@ -69,12 +69,18 @@ export default function Navbar() {
 
 function NavbarContent() {
   return (
-    <nav className="fixed top-0 z-10 w-full border-b bg-background py-2 shadow-md">
+    <nav className="border-bpy-2 fixed top-0 z-10 w-full shadow-md">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-5">
           <NavbarToggler />
           <Link href="/">
-            <Image alt="Logo" height={40} src="/logo.png" width={120} />
+            <Image
+              alt="Logo"
+              className="logo"
+              height={40}
+              src="/logo.png"
+              width={120}
+            />
           </Link>
         </div>
         <div className="hidden gap-3 md:flex">
