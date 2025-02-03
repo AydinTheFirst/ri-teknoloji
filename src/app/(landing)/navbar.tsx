@@ -69,18 +69,18 @@ export default function Navbar() {
 
 function NavbarContent() {
   return (
-    <nav className="fixed top-0 z-10 w-full bg-background py-2 shadow-md">
+    <nav className="fixed top-0 z-10 w-full border-b bg-background py-2 shadow-md">
       <div className="container flex items-center justify-between">
         <div className="flex items-center gap-5">
           <NavbarToggler />
           <Link href="/">
             <Image alt="Logo" height={40} src="/logo.png" width={120} />
           </Link>
-          <div className="hidden gap-3 md:flex">
-            {links.map((link) => (
-              <NavLink key={link.href} {...link} />
-            ))}
-          </div>
+        </div>
+        <div className="hidden gap-3 md:flex">
+          {links.map((link) => (
+            <NavLink key={link.href} {...link} />
+          ))}
         </div>
         <div className="flex gap-3">
           <Link href={"https://github.com/ri-teknoloji"}>
@@ -133,7 +133,7 @@ const NavbarToggler = () => {
       className="md:hidden"
       onClick={toggleMenu}
       size={"icon"}
-      variant={"outline"}
+      variant={"ghost"}
     >
       <Icon />
       <span className="sr-only">Toggle Menu</span>
