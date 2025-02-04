@@ -79,7 +79,7 @@ export default function Footer() {
         <hr className="col-span-12" />
         <div className="col-span-12 grid gap-3 md:col-span-6">
           <p>
-            © {new Date().getFullYear()} Ri Teknoloji. Tüm hakları saklıdır
+            © {new Date().getFullYear()} Ri Teknoloji Tüm hakları saklıdır.
           </p>
         </div>
         <div className="col-span-12 grid gap-3 md:col-span-6">
