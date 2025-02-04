@@ -37,7 +37,7 @@ const socials: LinkProps[] = [
     href: "#",
     icon: <LucideMap />,
     label:
-      "Ünalan Mahallesi Libadiye Caddesi Emaar Residence E Blok No: 82 Kat: 29 Daire: 291 Üsküdar - İstanbul",
+      "Ünalan Mahallesi Libadiye Caddesi Emaar Square Heights Residence E Blok No: 82 Kat: 29 Daire: 291 Üsküdar - İstanbul",
   },
 ];
 
