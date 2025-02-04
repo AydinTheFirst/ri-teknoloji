@@ -37,7 +37,7 @@ const socials: LinkProps[] = [
     href: "#",
     icon: <LucideMap />,
     label:
-      "Ünalan Mahallesi Libadiye Caddesi Emaar Residence E Blok No: 82 Kat: 29 Daire: 291 Üsküdar - İstanbul",
+      "Ünalan Mahallesi Libadiye Caddesi Emaar Square Heights Residence E Blok No: 82 Kat: 29 Daire: 291 Üsküdar - İstanbul",
   },
 ];
 
@@ -79,7 +79,7 @@ export default function Footer() {
         <hr className="col-span-12" />
         <div className="col-span-12 grid gap-3 md:col-span-6">
           <p>
-            © {new Date().getFullYear()} Ri Teknoloji. Tüm hakları saklıdır
+            © {new Date().getFullYear()} Ri Teknoloji Tüm hakları saklıdır.
           </p>
         </div>
         <div className="col-span-12 grid gap-3 md:col-span-6">
